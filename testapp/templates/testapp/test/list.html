@@ -1,0 +1,96 @@
+{% extends "testapp/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if package %}{{ package.name }}{% else %}Tests{% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="container">
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'testapp:test_list' %}">All Tests</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      {% for p in packages %}
+          <li {% if package.slug == p.slug %}class="selected"{% endif %}>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ p.get_absolute_url }}">{{ p.name }}</a>
+      </li>
+    </li>
+    {% endfor %}
+    </ul>
+  </div>
+
+
+    </div>
+
+
+<div class="tab-content card">
+      <!--Panel 1-->
+      <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+          <br>
+          <div class="card">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h1>{% if package %}{{ package.name }}</h1>
+        </li>
+        <li class="list-group-item">
+            <p>This package contains all the below tests.Click on </b>"Full Package"</b> to add the whole package directly to cart.<br><br>
+        <b>Note:Click on each Test to know about it in detail and to add it in cart separately</b></p>
+
+
+        </li>
+        <li class="list-group-item">
+          <!--Table-->
+<br></br>
+          <h4>Test Details</h4>
+
+<table class="table table-bordered">
+
+    <!--Table head-->
+
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody>
+    {% for test in tests %}
+<tr>
+          <td>  <div class="item">
+                <a href="{{ test.get_absolute_url }}">{{ test.name }}</a>  ₹{{ test.price }}<br>
+            <br></div>
+          </td>
+</tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+            {% else %}
+<table class="table table-bordered">
+
+{% for test in tests %}
+    <tr>
+        <td>
+
+            <div class="item">
+                <strong><a href="{{ test.get_absolute_url }}">{{ test.name }}</a> ₹{{ test.price }}<br></div></strong>
+            <br></div>
+
+        </td>
+    </tr>
+{% endfor %}
+{% endif %}
+</tbody>
+</table>
+
+
+
+{% endblock %}

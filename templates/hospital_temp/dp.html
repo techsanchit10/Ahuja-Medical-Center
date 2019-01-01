@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+{% extends 'basic_app/navbar_main.html' %}
+{% block body_block %}
+{% if user.is_authenticated %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Hello Dr.{{user.username}}!</h1>
+  <p class="lead">Here you can perform these tasks!</p>
+<p><strong>Note:</strong>    You will see more cards in future as we add more functionality for you!  </p>
+</div>
+{% else %}
+  <h2>Welcome to the site!</h2>
+{% endif %}
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Your Appointments</h4>
+      </div>
+      <div class="card-body">
+<h2><small class="text-muted">Check your Up-To-Date Appointments</small></h2>
+        <a href="{% url 'admin:index' %}" type="button" class="btn btn-lg btn-block btn-primary">Click Here</a>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">ePriscription Requests</h4>
+      </div>
+      <div class="card-body">
+        <h2><small class="text-muted">You can write ePriscription for patients</small></h2>
+
+        <a href="http://google.com" type="button" class="btn btn-lg btn-block btn-primary">Write one!</a>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+{% endblock %}

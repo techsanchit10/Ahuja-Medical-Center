@@ -1,0 +1,22 @@
+{% extends "testapp/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ test.name }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="test-detail">
+
+        <h1>{{ test.name }}</h1>
+        <h2><a href="{{ product.category.get_absolute_url }}">{{ test.package }}</a></h2>
+        <p class="price">INR {{ test.price }}</p>
+        <form action="{% url "cart:cart_add" test.id %}" method="post">
+            {{ cart_test_form }}
+            {% csrf_token %}
+            <input type="submit" value="Add to cart">
+        </form>
+        {{ test.description|linebreaks }}
+    </div>
+{% endblock %}

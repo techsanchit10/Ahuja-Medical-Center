@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+{% load staticfiles %}
+
+
+
+  {% block body_block %}
+  <link rel="stylesheet" href="{% static 'css/spcl1.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Concert+One&amp;subset=latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+    <div id="header">
+    <!-- <hr class="style-two"> -->
+    <h1 class="display-4 "><center>Surgeon</h1>
+    <hr class="style-four">
+    </div>
+
+    <div class="container jumbotron">
+      <table>
+        <tr>
+          <th></th>
+          <th><center>About the Specialization</th>
+        </tr>
+        <tr>
+        <td>
+          <img src="{% static 'images/entt.jpg' %}" alt="ENT specialist Pic">
+        </td>
+
+        <td>
+          <p id="about">
+          An ear, nose and throat specialist (ENT) is a physician trained in the medical and surgical treatment of the ears, nose throat, and related structures of the head and neck. They have special expertise in managing diseases of the ears, nose and nasal passage sinuses, larynx (voice box), oral cavity and upper pharynx (mouth and throat), as well as structures of the neck and face.
+          </p>
+        </td>
+      </tr>
+      </table>
+      <br>
+      <hr class="style-two">
+      <br>
+
+
+      <table id="doctors">
+        <td id="doctor_img" valign="top">
+          <div class="col-sm-3">
+              <div class="flip">
+                <div class="card face front">
+                  <div class="inner">
+                    <img class="card-img-top img-fluid" src="{% static 'images/SanjivDang.jpg' %}" alt="Card image cap" style="height : 20%; width: auto;">
+                  </div>
+                  <div class="face back card-body">
+                    <h6 class="card-title">Dr. Sandeep Gupta</h6>
+                    <p class="card-text">Surgeon</p>
+                    <a href="{% url 'appointment:book' %}" class="btn btn-primary">Book Appointment</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </td>
+
+        <td>
+          <table id = "time_table" border="2">
+            <caption align="bottom">Online Consultation Charges: ₹550 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;Normal Consultation Charges: ₹500 </caption>
+            <!-- <caption align="bottom"></caption> -->
+            <tr> <center>
+              <th>Days</th>
+              <th>Timings</th>
+            </tr>
+
+            <tr> <center>
+              <td> <b> Monday </b> </td>
+              <td>10:00 AM- 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Tuesday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Wednesday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Thursday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Friday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Saturday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+          </table>
+
+        </td>
+
+      </table>
+
+    </div>
+    </div>
+
+    <script>
+    $('.flip').hover(function(){
+          $(this).find('.card').toggleClass('flipped');
+
+      });
+
+    </script>
+
+{% endblock %}

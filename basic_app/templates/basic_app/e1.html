@@ -1,0 +1,63 @@
+def index(request):
+next = request.GET.get('next', '/admin')
+if request.method == "POST":
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user = authenticate(username=username, password=password)
+
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            data = Students.objects.all()
+            return render_to_response("login/profile.html", {'data', data})
+        else:
+            HttpResponse("Inactive User.")
+    else:
+        print("User Not Found!")
+        return HttpResponseRedirect(settings.LOGIN_URL)
+
+return render(request, 'login/home', {'redirect_to':next})
+# views.py for sessions
+username = None
+  if request.user.is_authenticated():
+        username =request.user.username
+        first_name =request.user.first_name
+        last_name =request.user.last_name
+        print(username)
+        print(first_name)
+        print(last_name)
+        return render(request,'basic_app/profile.html',{'username' : username, 'first_name': first_name, 'last_name': last})
+
+
+      # views.py for checking old Appointments
+      data=UserProfileInfo.objects.all()  # The 'all()' is implied by default.
+
+        # Number of visits to this view, as counted in the session variable.
+        num_visits=request.session.get('num_visits', 0)
+        request.session['num_visits'] = num_visits+1
+
+        # Render the HTML template index.html with the data in the context variable.
+        return render(
+            request,
+            'index.html',
+            context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors,
+                'num_visits':num_visits}, # num_visits appended
+        )
+        url_list=UserProfileInfo.objects.all()
+           url_dict={"web_pages":url_list}
+
+
+          username = None
+          if request.user.is_authenticated():
+              username =request.user.username
+              email =request.user.email
+              password =request.user.password
+              first_name =request.user.first_name
+              last_name =request.user.last_name
+              print(username)
+              print(email)
+              print(password)
+              print(first_name)
+              print(last_name)
+              return render(request,'basic_app/profile.html',{'username' : username, 'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, 'url_dict':url_dict})

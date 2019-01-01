@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+  <link rel="stylesheet" href="{% static 'css/spcl1.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+  <style media="screen">
+    .container p{
+      font-size: 25px;
+      font-weight: 100;
+      color: #600d0f;
+
+    }
+  </style>
+  <div class="container jumbotron">
+
+
+
+    {% if user.is_authenticated and appt %}
+      <h1 style="font-family: 'Hammersmith One', sans-serif;"><center>~My Appointments~</center></h1>
+      <br>
+      <div style="font-family: 'Work Sans', sans-serif;">
+      {% for p in appt %}
+        <h4><b><u>Patient ID and Name</u> -- {{p.p_id}}</u></b></h4 >
+        <br>
+
+        <h3><b>Appointment Number:</b></h3>
+          <p>{{p.app_no}}</p><br>
+        <h3><b>Appointment Date:</b></h3>
+            <p>{{p.appt_date}}</p><br>
+        <h3><b>Appointment Time Slot:</b> <p> 10:00 AM - 2:00 PM<p></h3>
+        <br>
+
+          <hr class="style-2">
+
+      {% endfor %}
+
+
+      {% else %}
+
+      <h1>Sorry! No Appointments Found</h1>
+
+      {% endif %}
+    </div>
+
+  </div>
+  {% endblock %}

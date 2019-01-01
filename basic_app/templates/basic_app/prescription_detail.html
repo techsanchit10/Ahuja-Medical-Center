@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+  <link rel="stylesheet" href="{% static 'css/spcl1.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+  <style media="screen">
+    p{
+      font-size: 25px;
+      font-weight: 100;
+      
+
+    }
+  </style>
+
+  <div class="container jumbotron">
+
+    {% if user.is_authenticated and prsc %}
+      <h1 style="font-family: 'Hammersmith One', sans-serif;"><center>~My ePrescriptions~</center></h1>
+      <br>
+      <div style="font-family: 'Work Sans', sans-serif;">
+      {% for p in prsc %}
+        <h4><b><u>Patient ID: {{p.p_id}}</u></b></h4 >
+        <br>
+
+        <h3><b>My Problem Description:</b></h3>
+          <p>{{p.prob_des}}</p><br>
+        <h3><b>Generated ePrescription:</b></h3>
+          {% if p.pres %}
+            <p>{{p.pres}}</p><br>
+
+          {% else %}
+            <p style="color:red; font-size:18px;"><small>(Sorry no Prescription is uploaded yet!)</small></p>
+          {% endif %}
+          <hr class="style-2">
+
+      {% endfor %}
+
+
+      {% else %}
+
+      <h1>Sorry! No Patients Found</h1>
+
+      {% endif %}
+    </div>
+
+  </div>
+  {% endblock %}

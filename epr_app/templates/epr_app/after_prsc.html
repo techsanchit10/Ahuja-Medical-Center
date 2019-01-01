@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+{% block body_block %}
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+<style media="screen">
+.jumbotron{
+  background-color: #819e6d;
+  background-image: url("https://www.transparenttextures.com/patterns/paper.png");
+  /* background-image: url("https://www.transparenttextures.com/patterns/tweed.png");; */
+}
+h3,h6
+{
+  font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
+  font-size: 20px;}
+  p{
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+  }
+</style>
+
+<div class="jumbotron">
+  <h3 class="display-4">Thank You, {{p_fname}} <br> </h3>
+  <br>
+  <h6>Your PatientID is : <big>{{p_id}}</big></h6>
+  <h6 >Your problem description is : <big>{{prob_des}}</big></h6><br><br>
+</div>
+
+<p style="color:red">
+  <b>Confirmation has been sent to email id! Your ePrescription will be generated on your login profile soon! Thank You</p> </b>
+  <p><small> You will be redirected to Homepage in  <span id="countdown">11</span>  seconds!</p>
+
+<!-- JavaScript part -->
+<script type="text/javascript">
+
+    // Total seconds to wait
+    var seconds = 11;
+
+    function countdown() {
+        seconds = seconds - 1;
+        if (seconds < 0) {
+            // Chnage your redirection link here
+            window.location = "{% url 'index' %}";
+        } else {
+            // Update remaining seconds
+            document.getElementById("countdown").innerHTML = seconds;
+            // Count down using javascript
+            window.setTimeout("countdown()", 1000);
+        }
+    }
+
+    // Run countdown function
+    countdown();
+
+</script>
+  {% endblock %}

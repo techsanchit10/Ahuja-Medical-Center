@@ -1,0 +1,53 @@
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}">
+
+<div class="container-fluid breadcrumbBox text-center">
+  <ol class="breadcrumb">
+    <li><a href="#">Review</a></li>
+    <li class="active"><a href="#">Order</a></li>
+    <li><a href="#">Payment</a></li>
+  </ol>
+</div>
+
+<div class="container text-center">
+
+  <div class="col-md-5 col-sm-12">
+    <div class="bigcart"></div>
+    <h1>Your shopping cart</h1>
+  </div>
+  <div class="col-md-7 col-sm-12 text-left">
+    <ul>
+      <li class="row list-inline columnCaptions">
+        <span>Test</span>
+        <span>Remove</span>
+        <span>Unit Price</span>
+        <span>Price</span>
+
+        {% for item in cart %}
+            {% with test=item.test %}
+        <li class="row">
+          <span class="test">{{ test.name }}</span>
+          <span class="Removeitem"><a href="{% url "cart:cart_remove" test.id %}">Remove</a></span>
+          <span class="price">${{ item.price }}</span>
+          <span class="totalprice">${{ item.total_price }}</span>
+        </li>
+            {% endwith %}
+        {% endfor %}
+
+
+        <li class="row totals">
+          <span class="itemName">Total:</span>
+          <span class="price">${{ cart.get_total_price }}</span>
+          <span class="order"> <a class="text-center" href="{% url "testapp:test_list" %}">Continue Shopping</a></span>
+          <span class="order"> <a class="text-center" href="{% url "orders:order_create" %}">Checkout</a></span>
+
+        </li>
+        </ul>
+        </div>
+
+        </div>
+
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="{% static "js/bootstrap.min.js" %}"></script>
+        <script src="{% static "js/customjs.js" %}"></script>

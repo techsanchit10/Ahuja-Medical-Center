@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+
+
+<style media="screen">
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  background-color: #00856f;
+  background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
+
+}
+
+input
+{
+  width: 100%;
+  height: 100%;
+  padding: .5em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  color:#339966;
+
+}
+input:focus {
+  outline: 0;
+  border-color: #00856f;
+}
+input:focus + .input-icon i {
+  color: #7ed321;
+}
+input:focus + .input-icon:after {
+  border-right-color: #7ed321;
+}
+label{
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+input[type="radio"]:checked + label,
+input:checked + label:before,
+select:focus,
+select:active {
+  background-color: #7ed321;
+  color: #fff;
+  border-color: #64ac15;
+}
+
+
+.input-group {
+  margin-bottom: 1em;
+  zoom: 1;
+}
+.input-group:before,
+.input-group:after {
+  content: "";
+  display: table;
+}
+.input-group:after {
+  clear: both;
+}
+.input-group-icon {
+  position: relative;
+}
+.input-group-icon input {
+  padding-left: 4.4em;
+}
+.input-group-icon .input-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.4em;
+  height: 3.4em;
+  line-height: 3.4em;
+  text-align: center;
+  pointer-events: none;
+}
+.input-group-icon .input-icon:after {
+  position: absolute;
+  top: 0.6em;
+  bottom: 0.6em;
+  left: 3.4em;
+  display: block;
+  border-right: 1px solid #e5e5e5;
+  content: "";
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.input-group-icon .input-icon i {
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.container {
+  box-shadow: 50px 50px 100px 1px rgba(0, 0, 0, 0.5);
+  width: 33%;
+  margin: auto;
+
+}
+
+.row {
+  zoom: 1;
+}
+.row:before,
+.row:after {
+  content: "";
+  display: table;
+}
+.row:after {
+  clear: both;
+}
+.col-half {
+  padding-right: 10px;
+  float: left;
+  width: 50%;
+}
+.col-half:last-of-type {
+  padding-right: 0;
+}
+.col-third {
+  padding-right: 10px;
+  float: left;
+  width: 30.33333333%;
+}
+.col-third:last-of-type {
+  padding-right: 0;
+}
+@media only screen and (max-width: 540px) {
+  .col-half {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  /* .butt {
+    background-color:#00856f;
+    border: none;
+    color: green;
+    padding: 5px 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  } */
+
+}
+
+</style>
+
+<body>
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+<div class="container jumbotron">
+  {% if registered %}
+  <h1>Thank you for registering!</h1>
+  <a type="button" href="{% url 'basic_app:user_login' %}" class="btn btn-success" style="display:block; width:100%;">Login</a>
+
+  {% else %}
+  <h1>Register Here</h1>
+
+  <form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+
+<input type="submit" class="btn btn-success " name="" value="Register">
+  </form>
+  {% endif %}
+</div>
+
+
+
+</body>
+</html>
+{% endblock %}

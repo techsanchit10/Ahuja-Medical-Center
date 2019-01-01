@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+
+{% block body_block %}
+<style media="screen">
+.container {
+  width: 33%;
+  margin: auto;
+  padding-top: 20px;
+}
+.jumbotron{
+  background-color: white;
+  margin: auto;
+
+}
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  width: 100wh;
+  height: 90vh;
+  color: #fff;
+
+  background-color: #fafafa;
+  background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");}
+h1{
+  font-family: 'Josefin Sans', sans-serif;
+
+  color: #2F4783;
+  text-align: center;
+}
+label{
+  font-family: 'Josefin Sans', sans-serif;
+  color: #2F4783;
+  text-align: left;
+}
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+input[type="password"], input[type="text"] {
+  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  border: 1px solid #a1a3a3;
+  border-radius: 4px;
+  box-shadow: 0 1px #fff;
+  box-sizing: border-box;
+  color: #696969;
+  height: 39px;
+  margin: 31px 0 0 29px;
+  padding-left: 37px;
+  transition: box-shadow 0.3s;
+  width: 240px;
+}
+input[type="password"]:focus, input[type="text"]:focus {
+  box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+  outline: 0;
+}
+
+</style>
+
+<div class="container">
+  <div class="jumbotron">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+    <h1>Doctor's Portal</h1>
+        <form action="{% url 'doctors_app:user_login' %}" method="post">
+          {% csrf_token %}
+
+          {% csrf_token %}
+          <label for="Username"> Username</label>
+          <input type="text" placeholder="Username" name="username">
+          <br>
+          <label for="Username"> Password</label>
+      <input type="password" placeholder="Password" name="password">
+      <br><br>
+
+          <br><input type="submit" class="btn btn-success " name="" value="Login">
+    <br>
+        </form>
+
+    </div>
+  </div>
+{% endblock %}

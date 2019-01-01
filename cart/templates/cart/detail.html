@@ -1,0 +1,67 @@
+{% extends "testapp/base.html" %}
+{% load static %}
+
+{% block title %}
+    Your Shopping cart
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-body">
+
+       <div class="container">
+           <h1 class="jumbotron-heading">Your Cart</h1>
+        </div>
+
+
+   <div class="container mb-4">
+       <div class="row">
+           <div class="col-12">
+               <div class="table-responsive">
+                   <table class="table table-striped">
+                       <thead>
+                           <tr>
+                               <th scope="col">Product</th>
+                               <th scope="col" class="text-right">Price</th>
+                               <th> </th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                         {% for item in cart %}
+                             {% with test=item.test %}
+                           <tr>
+                               <td><strong>{{ test.name }}</strong></td>
+                               <td class="text-right"><strong>₹{{ item.price }}</strong></td>
+                               <td class="text-right"><a href="{% url "cart:cart_remove" test.id %}" class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i> </a> </td>
+                           </tr>
+                             {% endwith %}
+                         {% endfor %}
+
+
+                           <tr>
+                               <td><strong>Total</strong></td>
+
+                               <td class="text-right"><strong>₹{{ cart.get_total_price }}</strong></td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+           <div class="col mb-2">
+               <div class="row">
+                   <div class="col-sm-12  col-md-6">
+                       <a href="{% url "testapp:test_list" %}" class="btn btn-block btn-success text-uppercase">Go Back to Tests</a>
+                   </div>
+                   <div class="col-sm-12 col-md-6 text-right">
+                       <a href="{% url "orders:order_create" %}" class="btn btn-block btn-success text-uppercase">Checkout</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+</div>
+
+
+    {% endblock %}

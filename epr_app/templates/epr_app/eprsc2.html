@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+
+{% block body_block %}
+<link href="https://fonts.googleapis.com/css?family=Galada" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+  <style>
+
+  #header{
+      padding-top: 30px;
+
+     color: white;
+     font-family: 'Josefin Sans', sans-serif;
+     background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+  }
+
+  /* HR IN HEADER */
+  hr.style-four {
+      height: 12px;
+      border: 0;
+      box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  /* LAST HR */
+
+  hr.style-eight {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.style-eight:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+#submit:disabled{
+  background-color: #818fa5;
+  border: none;
+}
+.jumbotron{
+  font-family: 'Josefin Sans', sans-serif;
+  width: 80%;
+  margin: auto;
+  border: 1px solid blue;
+
+}
+label{
+  font-weight: bold;
+}
+  </style>
+
+
+
+  <body onload="disableSubmit()">
+
+    <script>
+     function disableSubmit() {
+      document.getElementById("submit").disabled = true;
+     }
+
+      function activateButton(element) {
+
+          if(element.checked) {
+            document.getElementById("submit").disabled = false;
+           }
+           else  {
+            document.getElementById("submit").disabled = true;
+          }
+
+      }
+    </script>
+
+    <div id="header">
+    <h1 class="display-4"><center>ePrescription Form</h1>
+
+
+    <hr class="style-four">
+
+    </div>
+
+    <div class="container">
+      <div class="jumbotron">
+
+      <form method="post">
+        {% csrf_token %}
+        <p style="font-family: 'Josefin Sans', sans-serif"><b>• Please fill in details for new patient!</p></b>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label >Patient ID</label>
+              <input name="p_id" value = "P_{{p_id}}" type="text"class="form-control" disabled>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputName">First Name</label>
+              <input type="text" name ="p_fname" class="form-control"  placeholder="First Name">
+            </div>
+            <div class="form-group col-md-6">
+              <label>Last Name</label>
+              <input type="text" name="p_lname" class="form-control" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Email Address">
+          </div>
+          <label for="">Mobile Number</label>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">+91 </span>
+            </div>
+            <input type="text" name="phone" class="form-control" placeholder="Mobile Number" aria-label="number" aria-describedby="basic-addon1">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label >Address</label>
+              <input name="address" type="text" class="form-control" placeholder="Address">
+            </div>
+            <div class="form-group col-md-4">
+              <label >Pincode</label>
+              <input name="pincode" type="text" class="form-control" placeholder="Pincode" maxlength="6">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="input">Sex</label>
+              <select name="gender" class="form-control">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label >Date of Birth</label>
+                <input name="date_of_birth" type="date" class="form-control" placeholder="YYYY-MM-DD">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="input">Doctor and Specialization</label>
+                <select name="d_name" class="form-control">
+                  <option value = "Dr. Sanjiv Dang(ENT)">Dr. Sanjiv Dang(ENT)</option>
+                  <option value = "Dr. V.K Ahuja(General Physician)">Dr. V.K Ahuja(General Physician)</option>
+                  <option value = "Dr. Sandeep Gupta(Surgeon)">Dr. Sandeep Gupta(Surgeon)</option>
+                  <option value = "Dr. Priya Ahuja(Gynaecologist)">Dr. Priya Ahuja(Gynaecologist)</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <label for="input">Problem Description</label>
+              <textarea name="prob_des" rows="4" cols="80">
+              </textarea>
+            </div>
+            <br>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck" onchange="activateButton(this)">
+              <label class="form-check-label" for="gridCheck">
+                <b>I accept that above mentioned details are correct<b>
+              </label>
+            </div>
+          </div>
+          <button type="button" name="submit" id="submit" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">Submit Details</button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Proceed if the details are correct!</p>
+                    <p class="small">Press Back to edit details</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <button type="submit" class="btn btn-primary">Proceed</button>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+        </form>
+    </div>
+    <hr class="style-eight">
+  </div>
+
+
+{% endblock %}

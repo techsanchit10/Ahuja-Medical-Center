@@ -1,0 +1,52 @@
+{% extends "testapp/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if package %}{{ package.name }}{% else %}Tests{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+      <ul class="nav nav-tabs">
+        <!-- <li class="active"><a data-toggle="tab" href="{% url "testapp:test_list" %}">All Test</a></li> -->
+        {% for p in packages %}
+            <li {% if package.slug == p.slug %}class="selected"{% endif %}>
+                <a href="{{ p.get_absolute_url }}">{{ p.name }}</a>
+            </li>
+        {% endfor %}
+      </ul>
+
+
+    </div>
+
+    <div id="main" class="test-list">
+
+        <h1>{% if package %}{{ package.name }}</h1>
+
+        <p>This package contains all the below tests.Click on "Add to cart" to add the whole package directly to cart.<br><br>
+        <b>Note:Click on each Test to know about it in detail and to add it in cart separately</b></p>
+
+        {% for test in tests %}
+
+            <div class="item">
+                <a href="{{ test.get_absolute_url }}">{{ test.name }}</a> INR {{ test.price }}<br>
+            <br></div>
+        {% endfor %}
+
+        <form action="{% url "cart:cart_add" package.id %}" method="post">
+          {{ cart_test_form }}
+          {% csrf_token %}
+          <input type="submit" value="Add to cart">
+        </form>
+
+    <h2>{% else %}All Tests</h2>
+    {% for test in tests %}
+
+        <div class="item">
+            <a href="{{ test.get_absolute_url }}">{{ test.name }}</a> INR {{ test.price }}<br>
+        <br></div>
+    {% endfor %}
+    {% endif %}
+  </div>
+{% endblock %}

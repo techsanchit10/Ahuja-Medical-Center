@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<div class="container">
+  <br><br>
+  <form method="post" class="form-inline">
+    {% csrf_token %}
+    <input class="form-control-lg" type="search" name="search" placeholder="Search for Doctors or Departments" aria-label="Search" id="search_bar">
+    <button class="btn btn-lg btn-warning" type="submit"> <i class="fa fa-search"></i> </span></button>
+  </form>
+  <br>
+  <h3 class="display-4">Search Results</h3>
+  <br>
+
+
+  {% if messages %}
+    <ul class="messages">
+      {% for k in messages %}
+      <li style="color:red">{{ k }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <div>
+    {% if result %}
+    {% for k in result %}
+    <table border="0px">
+      <tr>
+        <td><b>Doctor's Name:<b></td>
+        <td>{{ k.d_name }}</td>
+      </tr>
+      <tr>
+        <td><b>Specialization:</b></td>
+        <td>{{ k.sp_name }}</td>
+      </tr>
+    </table>
+    <hr>
+      {% endfor %}
+      {% endif %}
+
+    {% if result2 %}
+    {% for k in result2 %}
+    <table border="0px">
+      <tr>
+        <td><b>Patient Name:<b></td>
+        <td>{{ k.p_fname }}</td>
+      </tr>
+    </table>
+    {% endfor %}
+
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}

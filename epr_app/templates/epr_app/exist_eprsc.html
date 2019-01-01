@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+{% load staticfiles %}
+
+
+    {% block body_block %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Galada" rel="stylesheet">
+
+    <!-- LINKS FOR SELECT2(SEARCH FOR dropdown) -->
+    <link href="https://fonts.googleapis.com/css?family=Galada" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+      <style>
+
+      #header{
+          padding-top: 30px;
+
+         color: white;
+         font-family: 'Josefin Sans', sans-serif;
+         background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+      }
+
+      /* HR IN HEADER */
+      hr.style-four {
+          height: 12px;
+          border: 0;
+          box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+      }
+
+      /* LAST HR */
+
+      hr.style-eight {
+        overflow: visible; /* For IE */
+        padding: 0;
+        border: none;
+        border-top: medium double #333;
+        color: #333;
+        text-align: center;
+    }
+    hr.style-eight:after {
+        content: "§";
+        display: inline-block;
+        position: relative;
+        top: -0.7em;
+        font-size: 1.5em;
+        padding: 0 0.25em;
+        background: white;
+    }
+
+    #submit:disabled{
+      background-color: #818fa5;
+      border: none;
+    }
+    .jumbotron{
+      font-family: 'Josefin Sans', sans-serif;
+      width: 80%;
+      margin: auto;
+      border: 1px solid blue;
+
+    }
+      </style>
+
+
+  <body onload="disableSubmit()">
+
+    <script>
+     function disableSubmit() {
+      document.getElementById("submit").disabled = true;
+     }
+
+      function activateButton(element) {
+
+          if(element.checked) {
+            document.getElementById("submit").disabled = false;
+           }
+           else  {
+            document.getElementById("submit").disabled = true;
+          }
+
+      }
+    </script>
+
+    <div id="header">
+    <h1 class="display-4"><center>ePrescription Form</h1>
+
+
+    <hr class="style-four">
+
+    </div>
+
+    <div class="container">
+      <div class="jumbotron">
+        <h5>Fill in the details for the existing patient:</h4>
+          <br>
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group col-md-4">
+        {{pid_form}}
+
+        </div>
+
+        <div class="form-row">
+          <label for="input">Problem Description</label>
+
+          <textarea name="prob_des" rows="4" cols="80">
+          </textarea>
+        </div>
+        <br>
+
+        <div class="form-group col-md-4">
+          <label for="input">Doctor and Specialization</label>
+          <select name="d_name" class="form-control">
+            <option value = "Dr. Sanjiv Dang (ENT)">Dr. Sanjiv Dang (ENT)</option>
+            <option value = "Dr. V.K. Ahuja (General Physician)">Dr. V.K. Ahuja (General Physician)</option>
+            <option value = "Dr. Sandeep Gupta (Surgeon)">Dr. Sandeep Gupta (Surgeon)</option>
+            <option value = "Dr. Priya Ahuja (Gynaecologist)">Dr. Priya Ahuja (Gynaecologist)</option>
+          </select>
+        </div>
+
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck" onchange="activateButton(this)">
+              <label class="form-check-label" for="gridCheck">
+                <b>I accept that above mentioned details are correct<b>
+              </label>
+            </div>
+          </div>
+          <button type="button" name="submit" id="submit" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">Submit Details</button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Proceed if the details are correct!</p>
+                    <p class="small">Press Back to edit details</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <button type="submit" class="btn btn-primary">Proceed</button>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+        </form>
+    </div>
+    <hr class="style-eight">
+  </div>
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+      $('.js-example-basic-single').select2();
+  });
+  </script>
+
+{% endblock %}

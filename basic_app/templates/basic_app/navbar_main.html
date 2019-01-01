@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Prompt:500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/hosp.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+    <title></title>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shift sticky-top" id="nav1" >
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}"> <h5 style="font-family: 'Courgette', cursive;  margin-top: 3px; margin-bottom: 3px; margin-left: 30px;">Ahuja &nbsp; Clinic</h1> </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto" id="nav1Text">
+        <li class="nav-item dropdown" id="nav2Sp">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Specialization
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'basic_app:gen_phy' %}">General Physician</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'basic_app:gynae' %}">Gynaecologist</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'basic_app:ent' %}">ENT</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'basic_app:surgeon' %}">Surgeon</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'appointment:book' %}" >Appointment</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">e-Prescription</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <h5 class="dropdown-header">ePrescription for:</h5>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'epr_app:exist' %}">Registered Patient</a>
+            <a class="dropdown-item" href="{% url 'epr_app:epr' %}">New Patient</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'testapp:test_list' %}">Test</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="." id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{user.username}}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <h5 class="dropdown-header">Welcome {{user.username}}</h5>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'basic_app:profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </div>
+        </li>
+
+        {% else %}
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="." id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Login
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <h5 class="dropdown-header">Login as</h5>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'basic_app:user_login' %}">User</a>
+            <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+            <a class="dropdown-item" href="{% url 'doctors_app:doctor_login' %}">Doctor</a>
+            <a class="dropdown-item" href="#">Lab Attendant</a>
+          </div>
+        </li>
+
+        {% endif %}
+
+
+<li class="nav-item">
+      <div class="cart">
+          {% with total_items=cart|length %}
+              {% if cart|length > 0 %}
+              <a class="nav-link waves-effect" href="{% url "cart:cart_detail" %}">
+                <span class="badge red z-depth-1 mr-1">{{ total_items }}  </span>
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+
+              {% else %}
+              <a class="nav-link waves-effect">
+                <span class="badge red z-depth-1 mr-1"></span>
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+              {% endif %}
+          {% endwith %}
+      </div>
+</li>
+    </div>
+  </nav>
+          {% block body_block %}
+
+          {% endblock %}
+
+<!-- footer -->
+  <footer class="page-footer font-small stylish-color-dark pt-4 mt-4" style="font-family: 'Josefin Sans', sans-serif">
+
+          <table>
+            <td>
+              <div class=" text-center text-md-left">
+
+              <!-- Grid row -->
+              <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+
+                  <!-- Content -->
+                  <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                  <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+
+              </td>
+
+
+              <td>
+
+
+                  <!-- Links -->
+                  <h5 class="font-weight-bold mt-3 mb-4">Useful Links</h5>
+
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#!">About us</a>
+                    </li>
+                    <li>
+                      <a href="#!">Contact</a>
+                    </li>
+                    <li>
+                      <a href="#!">FAQ</a>
+                    </li>
+                  </ul>
+
+
+              </td>
+
+
+              <td>
+
+
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4" id="map">Our Location</h5>
+                        <!-- <div id="map" style="width:340px;height:340px;background:yellow"></div> -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.0211633573645!2d77.19080431508316!3d28.659084982407403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d028242c74697%3A0x320721a00b3ad0d0!2sNaresh+Ahuja!5e0!3m2!1sen!2sin!4v1529941249008" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+
+
+              </td>
+          </table>
+
+
+
+
+          <div id="social_btn">
+              <hr>
+            <!-- Social buttons -->
+            <ul class="list-unstyled list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#" class="btn-floating btn-fb mx-1">
+                  <i class="fab fa-2x fa-facebook-square is-medium"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="btn-floating btn-tw mx-1">
+                  <i class="fab fa-2x fa-twitter-square "></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="btn-floating btn-gplus mx-1">
+                  <i class="fab fa-2x fa-google-plus-square"> </i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="btn-floating btn-li mx-1">
+                  <i class="fab fa-2x fa-linkedin"> </i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fab fa-2x fa-arrow-circle-up"</button> -->
+
+            <!-- Social buttons -->
+
+
+          </footer>
+
+  </body>
+</html>

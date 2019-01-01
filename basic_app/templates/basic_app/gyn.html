@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+{% load staticfiles %}
+
+
+
+  {% block body_block %}
+  <link rel="stylesheet" href="{% static 'css/spcl1.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Concert+One&amp;subset=latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+    <div id="header">
+    <!-- <hr class="style-two"> -->
+    <h1 class="display-4 "><center>Gyneacologist</h1>
+    <hr class="style-four">
+    </div>
+
+    <div class="container jumbotron">
+      <table>
+        <tr>
+          <th></th>
+          <th><center>About the Specialization</th>
+        </tr>
+        <tr>
+        <td>
+          <img src="{% static 'images/gyn.jpg' %}" alt="Gyneacologist Pic">
+        </td>
+
+        <td>
+          <p id="about">
+            A gynecologist is a medical doctor that specializes in women's reproductive systems. A gynecologist performs a variety of tests and exams focused on women's health. Gynecologists are responsible for performing the standard yearly exam on adult women to ensure their reproductive health. During this exam, the doctor will physically examine the woman, perform a pap smear, perform STD tests, complete a breast exam, and monitor the woman's use of birth control.
+          </p>
+        </td>
+      </tr>
+      </table>
+      <br>
+      <hr class="style-two">
+      <br>
+
+
+      <table id="doctors">
+        <td id="doctor_img" valign="top">
+          <div class="col-sm-3">
+              <div class="flip">
+                <div class="card face front">
+                  <div class="inner">
+                    <img class="card-img-top img-fluid" src="{% static 'images/PriyaAhuja.jpg' %}" alt="Card image cap" style="height : 20%; width: auto;">
+                  </div>
+                  <div class="face back card-body">
+                    <h6 class="card-title">Dr. Priya Ahuja</h6>
+                    <p class="card-text">Gyneacologist</p>
+                    <a href="{% url 'appointment:book' %}" class="btn btn-primary">Book Appointment</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </td>
+
+        <td>
+          <table id = "time_table" border="2">
+            <caption align="bottom">Online Consultation Charges: ₹550 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Normal Consultation Charges: ₹500 </caption>
+            <!-- <caption align="bottom"></caption> -->
+            <tr> <center>
+              <th>Days</th>
+              <th>Timings</th>
+            </tr>
+
+            <tr> <center>
+              <td> <b> Monday </b> </td>
+              <td>10:00 AM- 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Tuesday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Wednesday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Thursday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Friday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+
+            </tr>
+            <tr> <center>
+              <td> <b> Saturday </b> </td>
+              <td>10:00 AM - 2:00 PM</td>
+
+          </table>
+
+        </td>
+
+      </table>
+
+    </div>
+    </div>
+
+    <script>
+    $('.flip').hover(function(){
+          $(this).find('.card').toggleClass('flipped');
+
+      });
+
+    </script>
+
+  {% endblock %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends 'basic_app/navbar_main.html' %}
+
+{% block body_block %}
+    <p>this is appointment pages  </p>
+    <h1>this is doctors page</h1>
+
+
+        {% for ahii in hii %}
+            <h2>{{ahii.doctors_appt}}</h2>
+        {% endfor %}
+
+            <a href="{% url 'admin:index' %}">admin</a>
+
+            {% if user.is_authenticated %}
+               <a href="{% url 'doctors_app:logout' %}">Logout </a> </li>
+            {% else %}
+               <a href="{% url 'doctors_app:user_login' %}">Login</a> </li>
+            {% endif %}
+
+{% endblock %}
